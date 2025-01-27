@@ -1,0 +1,9 @@
+.mian-container{
+  background-color: aqua;
+}
+
+@media (max-width:320px) {
+  .mian-container{
+    background-color: blueviolet;
+  }
+}
