@@ -1,0 +1,103 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<div>
+  <h1>Post Request</h1>
+  <input type="text" placeholder="Title" id="title">
+  <input type="text" placeholder="Body" id="body">
+  <button onclick="PostData()">Create</button>
+  <div id="postResult"></div>
+</div>
+<body>
+  <script>
+    function PostData(){
+      const title =document.getElementById("title").value;
+      const body = document.getElementById("body").value;
+     if(!title || !body){
+      alert("Please enter title and body")
+      return;
+     }
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST","https://jsonplaceholder.typicode.com/posts/",true)
+      xhr.setRequestHeader("Content-Type","application/json")
+      const data= JSON.stringify({title:title, body:body})
+
+
+      xhr.onreadystatechange = function(){
+        if(xhr.readyState ==4 && xhr.status ==201){
+          console.log(xhr.response)
+          const datas =JSON.parse(xhr.response)
+          document.getElementById("postResult").innerText =datas
+        }
+      }
+      xhr.send(data)
+      
+    }
+  </script>
+  
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POST Request Example</title>
+</head>
+<body>
+  <div>
+    <h1>Post Request</h1>
+    <input type="text" placeholder="Title" id="title">
+    <input type="text" placeholder="Body" id="body">
+    <button onclick="PostData()">Create</button>
+    <div id="postResult"></div>
+  </div>
+
+  <script>
+    function PostData() {
+      const title = document.getElementById("title").value;
+      const body = document.getElementById("body").value;
+
+      if (!title || !body) {
+        alert("Please enter title and body");
+        return;
+      }
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "https://jsonplaceholder.typicode.com/posts/", true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+
+      const data = JSON.stringify({ title: title, body: body });
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+          if (xhr.status == 201) {
+            const responseData = JSON.parse(xhr.response);
+            document.getElementById("postResult").innerHTML = `
+              <h3>Response:</h3>
+              <p><strong>ID:</strong> ${responseData.id}</p>
+              <p><strong>Title:</strong> ${responseData.title}</p>
+              <p><strong>Body:</strong> ${responseData.body}</p>
+            `;
+          } else {
+            document.getElementById("postResult").innerHTML = `
+              <p style="color: red;">Error: ${xhr.status} - ${xhr.statusText}</p>
+            `;
+          }
+        }
+      };
+      xhr.send(data);
+    }
+  </script>
+</body>
+</html>
+
+
+<!-- 1.35 -->

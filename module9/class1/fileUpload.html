@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <input type="file" id="fileUpload">
+    <button onclick="uploadFile()">Upload File</button>
+  </div>
+</body>
+
+<script>
+  function uploadFile(){
+    const fileInput =document.getElementById("fileUpload")
+    const file=fileInput.files[0]
+    const formData =new FormData()
+    formData.append("file",file)
+
+
+    const xhr = new XMLHttpRequest()
+    xhr.open("POST","https://jsonplaceholder.typicode.com/posts/",true)
+
+    xhr.onreadystatechange = function(){
+
+      if(xhr.readyState ==4 && xhr.status === 200){
+        console.log(xhr)
+        
+        
+      }
+    }
+    xhr.send(formData)
+  }
+</script>
+</html>

@@ -1,0 +1,47 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PUT Request Example</title>
+</head>
+<body>
+  <div>
+    <h1>Put Request</h1>
+    <button onclick="PostData()">Update Post</button>
+    <div id="postResult"></div>
+  </div>
+
+  <script>
+    function PostData() {
+      // Create an XMLHttpRequest object
+      const xhr = new XMLHttpRequest();
+      xhr.open("PUT", "https://jsonplaceholder.typicode.com/posts/1", true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+
+      // Prepare data payload
+      const data = JSON.stringify({
+        title: "Hlow",
+        body: "Hlow Worlds",
+        userId: 1
+      });
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          // Check for successful PUT response
+            console.log(xhr.responseText);
+           document.getElementById("postResult").innerText = xhr.responseText;
+            
+          
+        }
+      };
+
+      // Send the request
+      xhr.send(data);
+    }
+  </script>
+</body>
+</html>

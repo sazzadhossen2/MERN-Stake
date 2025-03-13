@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button onclick="articleDelete()">Delete</button>
+  <div id="deketeResult"></div>
+</body>
+<script>
+  function articleDelete(){
+    const xhr =new XMLHttpRequest();
+    xhr.open("DELETE","https://jsonplaceholder.typicode.com/posts/1",true)
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState ==4 && xhr.status ==200){
+        document.getElementById("deketeResult").innerText=xhr.responseText
+      }
+    }
+    xhr.send()
+
+  }
+</script>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DELETE Request Example</title>
+</head>
+<body>
+  <button onclick="articleDelete()">Delete</button>
+  <div id="deleteResult"></div>
+
+  <script>
+    function articleDelete() {
+      const xhr = new XMLHttpRequest();
+      xhr.open("DELETE", "https://jsonplaceholder.typicode.com/posts/1", true);
+      xhr.setRequestHeader("Content-Type", "application/json"); // Optional
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200 || xhr.status === 204) { // Some APIs return 204 No Content
+            document.getElementById("deleteResult").innerText = "Post deleted successfully.";
+          } else {
+            document.getElementById("deleteResult").innerText = "Failed to delete post.";
+          }
+        }
+      };
+
+      xhr.send(); // Send the request
+    }
+  </script>
+</body>
+</html> -->
