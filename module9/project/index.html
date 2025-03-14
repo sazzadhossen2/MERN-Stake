@@ -1,0 +1,198 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+ <div class="container mt-5">
+ <h2 class="text-center mb-4">User Post</h2>
+ </div>
+
+ <div id="loading" class="text-center">
+  <div class="spinner-border text-primary" role="status"></div>
+  <p>Loading...</p>
+ </div>
+
+ <table class="table table-bordered table-striped d-none" id="dataTable">
+<thead class="table-dark">
+  <tr>
+<th>ID</th>
+<th>Title</th>
+<th>Body</th>
+  </tr>
+</thead>
+
+<tbody id="tableBody">
+
+</tbody>
+ </table>
+
+ <br>
+ <div class="container">
+  <div class="row" id="row">
+
+  </div>
+ </div>
+
+
+ <script>
+  let dataTable =document.getElementById('dataTable')
+  let tableBody= document.getElementById("tableBody")
+  let loading =document.getElementById("loading")
+  let row =document.getElementById("row")
+
+  function fatchData(){
+    fetch("https://jsonplaceholder.typicode.com/posts").then(Response=>Response.json()).then(data=>{
+      console.log(data);
+      loading.classList.add('d-none')
+      dataTable.classList.remove('d-none')
+
+      data.reverse().forEach(Post=>{
+let row =`
+<tr>
+  <td>${Post.id}</td>
+  <td>${Post.title}</td>
+  <td>${Post.body}</td>
+</tr>
+`;
+
+tableBody.innerHTML =row +tableBody.innerHTML
+      })
+    })
+  }
+  fatchData();
+
+
+
+  function fatchDataRow(){
+    fetch("https://jsonplaceholder.typicode.com/posts").then(Response=>Response.json()).then(data=>{
+      console.log(data);
+      console.log(data);
+      
+
+      data.reverse().forEach(Post=>{
+        console.log(post.title);
+let col =`
+<div class="col-md-4">
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">${post.title}</h5>
+    <p class="card-text">${post.body}</p>
+
+  </div>
+</div>
+
+</div>
+`;
+
+row.innerHTML =col +row.innerHTML
+
+      })
+    })
+  }
+  fatchDataRow();
+
+ </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+ <div class="container mt-5">
+   <h2 class="text-center mb-4">User Post</h2>
+ </div>
+
+ <div id="loading" class="text-center">
+  <div class="spinner-border text-primary" role="status"></div>
+  <p>Loading...</p>
+ </div>
+
+ <div class="container">
+   <table class="table table-bordered table-striped d-none" id="dataTable">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Body</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+   </table>
+ </div>
+
+ <br>
+ <div class="container">
+  <div class="row" id="row"></div>
+ </div>
+
+ <script>
+  let dataTable = document.getElementById('dataTable');
+  let tableBody = document.getElementById("tableBody");
+  let loading = document.getElementById("loading");
+  let row = document.getElementById("row");
+
+  function fetchData() {
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        loading.classList.add('d-none'); // Hide loading
+        dataTable.classList.remove('d-none'); // Show table
+
+        data.reverse().forEach(Post => {
+          let rowHTML = `
+          <tr>
+            <td>${Post.id}</td>
+            <td>${Post.title}</td>
+            <td>${Post.body}</td>
+          </tr>
+          `;
+          tableBody.insertAdjacentHTML('a', rowHTML);
+        });
+      })
+      .catch(error => console.error("Error fetching data:", error));
+  }
+
+  function fetchDataRow() {
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+
+        data.reverse().forEach(Post => {
+          let col = `
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">${Post.title}</h5>
+                <p class="card-text">${Post.body}</p>
+              </div>
+            </div>
+          </div>
+          `;
+
+          row.insertAdjacentHTML('afterbegin', col);
+        });
+      })
+      .catch(error => console.error("Error fetching data:", error));
+  }
+
+  fetchData();
+  fetchDataRow();
+
+ </script>
+
+</body>
+</html>
